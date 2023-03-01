@@ -1,77 +1,77 @@
-const { db } = require('./server/db')
+const { db } = require('../server/db')
 
-const User = require('./server/db/models/User')
-const Product = require('./server/db/models/Product')
+const User = require('../server/db/models/User')
+const Product = require('../server/db/models/Product')
 // const Order = require("./server/db/models/Order")
 // const OrderProduct = require("./server/db/models/Order-Product")
 
 const users = [
   {
     firstName: 'Zelma',
-    laststName: 'Scotchmor',
+    lastName: 'Scotchmor',
     email: 'zscotchmor0@google.com.hk',
     password: 'h93VUXnYr',
     address: '310 Delta Road. Perth Amboy, TX 29861.',
   },
   {
     firstName: 'Antin',
-    laststName: 'Coplestone',
+    lastName: 'Coplestone',
     email: 'acoplestone1@liveinternet.ru',
     password: 'p9VGrxP',
     address: '135 Sesame Lane. Rowlett, DC 29443.',
   },
   {
     firstName: 'Fionnula',
-    laststName: 'Barock',
+    lastName: 'Barock',
     email: 'fbarock2@cloudflare.com',
     password: '8NHEdJXaeV3X',
     address: '121 Delta Road. Garland, TX 48926.',
   },
   {
     firstName: 'Casi',
-    laststName: 'Aspland',
+    lastName: 'Aspland',
     email: 'caspland3@timesonline.co.uk',
     password: 'Fgv6it55n',
     address: '226 Turner Lane. Princeton, SC 90561.',
   },
   {
     firstName: 'Guillaume',
-    laststName: 'Hankin',
+    lastName: 'Hankin',
     email: 'ghankin4@freewebs.com',
     password: 'EUogWFrR3DTl',
     address: '107 Blackberry Road. Denton, OH 51159.',
   },
   {
     firstName: 'Tam',
-    laststName: 'Stathers',
+    lastName: 'Stathers',
     email: 'tstathers5@bloglovin.com',
     password: 'KqDE7XmLBd8P',
     address: '408 Bruckner Street. Perth Amboy, DC 47158.',
   },
   {
     firstName: 'Garwin',
-    laststName: 'Tolomei',
+    lastName: 'Tolomei',
     email: 'gtolomei6@aboutads.info',
     password: 'VjVvHksz',
     address: '261 Driggs Lane. Corizon, NY 76255.',
   },
   {
     firstName: 'Hayley',
-    laststName: 'Troubridge',
+    lastName: 'Troubridge',
     email: 'htroubridge7@time.com',
     password: 'Qw0n5XsYQhIr',
     address: '240 Bruckner Lane. Denton, AK 70008.',
   },
   {
     firstName: 'Bonnie',
-    laststName: 'Garnsworth',
+    lastName: 'Garnsworth',
     email: 'bgarnsworth8@merriam-webster.com',
     password: 'yIZBnsZ3fra0',
     address: '457 Tailor Way. Forest Hills, TX 31831.',
   },
   {
     firstName: 'Aleksandr',
-    laststName: 'Voak',
+    lastName: 'Voak',
     email: 'avoak9@paypal.com',
     password: 'ebAEfEu4ALW',
     address: '450 Turner Ave. Rowlett, MN 68289.',
