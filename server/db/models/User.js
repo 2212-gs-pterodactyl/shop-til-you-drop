@@ -9,30 +9,50 @@ const SALT_ROUNDS = 5;
 const User = db.define('user', {
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+			notEmpty: true,
+			notNull: { msg: "first name is required" },
+		},
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+			notEmpty: true,
+			notNull: { msg: "last name is required" },
+		},
   },
   email:{
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
     validate:{
-      isEmail: true
+      notEmpty: true,
+			isEmail: true,
+			notNull: { msg: "email is required" },
     }
   },
   password: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+			notNull: { msg: "password is required" },
+		},
   },
   address:{
     type:Sequelize.STRING
   },
   role:{
-    type: Sequelize.ENUM("admin", "user")
-  }
+    type: Sequelize.ENUM("admin", "user"),
+    defaultValue: "user"
+  },
+  fullName: {
+		type: Sequelize.VIRTUAL,
+		get() {
+			return `${this.firstName} ${this.lastName}`;
+		},
+	},
 })
 
 module.exports = User
