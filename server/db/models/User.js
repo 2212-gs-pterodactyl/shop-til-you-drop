@@ -36,8 +36,9 @@ const User = db.define('user', {
   password: {
     type: Sequelize.STRING,
     allowNull: false,
+    len:[6, 18],
     validate: {
-			notNull: { msg: "password is required" },
+			notNull: { msg: "password is required, between 6-18 characters" },
 		},
   },
   address:{
