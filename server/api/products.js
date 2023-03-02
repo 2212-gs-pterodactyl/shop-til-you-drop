@@ -1,39 +1,39 @@
-const router = require("express").Router();
-const { Product } = require("../db");
+const router = require('express').Router()
+const { Product } = require('../db')
 
-module.exports = router;
+module.exports = router
 
-//GET /products/
-router.get("/", async (req, res, next) => {
+//GET api/products/
+router.get('/', async (req, res, next) => {
   try {
-    const products = await Product.findAll({});
-    res.json(products);
+    const products = await Product.findAll({})
+    res.json(products)
   } catch (err) {
-    next(err);
+    next(err)
   }
-});
+})
 
-//GET /products/:id
-router.get("/:id", async (req, res, next) => {
+//GET api/products/:id
+router.get('/:id', async (req, res, next) => {
   try {
-    const singleProduct = await Product.findbyPk(req.params.id);
-    res.json(singleProduct);
+    const singleProduct = await Product.findByPk(req.params.id)
+    res.json(singleProduct)
   } catch (err) {
-    next(err);
+    next(err)
   }
-});
+})
 
-//GET /products/:size
+//GET api/products/:size
 //TEST ROUTE: for filtering by size
-router.get("/:size", async (req, res, next) => {
+router.get('/:size', async (req, res, next) => {
   try {
     const products = await Product.findAll({
       where: {
         size: req.params.size,
       },
-    });
-    res.json(products);
+    })
+    res.json(products)
   } catch (err) {
-    next(err);
+    next(err)
   }
-});
+})

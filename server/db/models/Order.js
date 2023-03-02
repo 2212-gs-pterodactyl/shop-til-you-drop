@@ -1,8 +1,10 @@
-const Sequelize = require("sequelize");
-const db = require("../db");
+const Sequelize = require('sequelize')
+const db = require('../db')
 
-const Order = db.define("order", {
-  state: Sequelize.ENUM("cart", "completed"),
+const Order = db.define('order', {
+  state: {
+    type: Sequelize.ENUM('cart', 'completed'),
+  },
   totalPrice: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -14,6 +16,6 @@ const Order = db.define("order", {
   paymentInfo: {
     type: Sequelize.STRING,
   },
-});
+})
 
-module.exports = Order;
+module.exports = Order
