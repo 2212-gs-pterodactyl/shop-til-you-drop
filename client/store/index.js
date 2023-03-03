@@ -3,6 +3,7 @@ import cartSlice from "./reducers/cartSlice";
 import userSlice from "./reducers/userSlice";
 import productsSlice from "./reducers/productsSlice";
 import auth from "./auth";
+export * from "./auth";
 
 const store = configureStore({
   reducer: {
@@ -13,4 +14,4 @@ const store = configureStore({
 });
 
 export default store;
-export * from "./auth";
+
