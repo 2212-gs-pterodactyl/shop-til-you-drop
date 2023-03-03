@@ -1,33 +1,39 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {
   fetchAllProducts,
   selectProducts,
-} from "../store/reducers/productsSlice";
-// import { Link } from 'react-router-dom'
+} from '../store/reducers/productsSlice'
 
 function AllProducts() {
-  const dispatch = useDispatch();
-  const products = useSelector(selectProducts);
+  const dispatch = useDispatch()
+  const products = useSelector(selectProducts)
+  const cart = useSelector((state) => state.cart)
+  console.log('cart state-->', cart)
 
   useEffect(() => {
-    dispatch(fetchAllProducts());
-  }, [dispatch]);
-  // console.log('products', products)
+    dispatch(fetchAllProducts())
+  }, [dispatch])
+
   return (
     <>
-      <div>AllProducts</div>
-      <ul>
-        {products.map((product) => (
-          <div>
-            <li>Name:{product.name}</li>
-            <li>Description:{product.description}</li>
-            <li>Price:{product.price}</li>
-          </div>
-        ))}
-      </ul>
+      <div>All Products</div>
+
+      {products.map((product) => (
+        <div key={product.id}>
+          <Link to={`/products/${product.id}`}>
+            <div>Name:{product.name}</div>
+            <div>Description:{product.description}</div>
+            <div>Price:{product.price}</div>
+            <img src={product.img_URL}></img>
+          </Link>
+
+          <button onClick={() => alert('Added to Cart')}>Add to Cart</button>
+        </div>
+      ))}
     </>
-  );
+  )
 }
 
-export default AllProducts;
+export default AllProducts
