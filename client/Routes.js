@@ -1,4 +1,3 @@
-
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
@@ -24,9 +23,11 @@ class Routes extends Component {
       <div>
         <Switch>
           <Route path="/products/:id" component={SingleProduct} />
+          <Route path="/users/:id" component={UserProfile} />
           <Route path="/cart" component={Cart} />
           <Route path="/products" component={AllProducts} />
-          <Route path="/" component={UserProfile} />
+          <Route path="/" component={UserProfile} />{" "}
+          {/* Eventually we will need a homepage @ this route*/}
         </Switch>
         {isLoggedIn ? (
           <Switch>
@@ -67,4 +68,3 @@ const mapDispatch = (dispatch) => {
 // // The `withRouter` wrapper makes sure that updates are not blocked
 // // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes));
-

@@ -23,8 +23,7 @@ const SingleProduct = () => {
   return (
     <div>
       <h1>{product.name}</h1>
-      <img src="https://www.ikea.com/us/en/images/products/fejka-artificial-potted-plant-indoor-outdoor-monstera__0614197_pe686822_s5.jpg"></img>
-
+      <img src={product.img_URL}></img>
       <div> Price: {product.price} </div>
       <div> Size: {product.size}</div>
       <div> Type: {product.type}</div>
