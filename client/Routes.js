@@ -7,7 +7,7 @@ import Home from './components/Home'
 import { me } from './store'
 import UserProfile from './components/UserProfile'
 import singleProduct from './components/SingleProduct'
-
+import AllProducts from './components/AllProducts'
 
 /**
  * COMPONENT
@@ -23,8 +23,8 @@ class Routes extends Component {
       <div>
         <Switch>
           <Route path="/cart" component={Cart} />
+          <Route path="/products" component={AllProducts} />
           <Route path="/" component={UserProfile} />
-    
         </Switch>
         {isLoggedIn ? (
           <Switch>
@@ -33,11 +33,11 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-            <Route path='/' exact component={ Login } />
+            <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
           </Switch>
-        )} 
+        )}
       </div>
     )
   }
@@ -46,11 +46,11 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.auth.id,
   }
 }
 
@@ -65,4 +65,3 @@ const mapDispatch = (dispatch) => {
 // // The `withRouter` wrapper makes sure that updates are not blocked
 // // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes))
-
