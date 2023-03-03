@@ -5,7 +5,7 @@ export const fetchOneUserAsync = createAsyncThunk(
   "users/fetchOne",
   async (id) => {
     try {
-      const { data } = await axios.get(`http://localhost:3000/api/users/${id}`);
+      const { data } = await axios.get(`/api/users/${id}`);
       return data;
     } catch (e) {
       console.log(e);
@@ -27,6 +27,7 @@ const userSlice = createSlice({
 /* This is a function we will pass to useSelector in our component,
 to read values from our specific slice of redux state. */
 export const selectUser = (state) => {
+  console.log("userSlice.30, state======", state);
   return state.user;
   // this is the same "user" that is stuck to the name property in userSlice.
 };
