@@ -20,8 +20,8 @@ const Cart = () => {
     return (
         <div>
             {cart.map((cartInfo)=>(
-                <div>
-                    <h1>Order for {cartInfo.user.fullname}</h1>
+                <div key={cart.id}>
+                    <h1>Inventory {cartInfo.count}</h1>
                     <p>{cartInfo.totalPrice}</p>
                 </div>
             ))
