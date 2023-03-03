@@ -4,8 +4,12 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 export const fetchAllProducts = createAsyncThunk(
   'products/getAll',
   async () => {
-    const { data } = await axios.get('/api/products')
-    return data
+    try {
+      const { data } = await axios.get('/api/products')
+      return data
+    } catch (error) {
+      console.log(error)
+    }
   }
 )
 export const fetchSingleProduct = createAsyncThunk(
@@ -58,14 +62,15 @@ export const deleteProductAsync = createAsyncThunk(
 
 export const productsSlice = createSlice({
   name: 'products',
-  initialState: {
-    allProducts: [],
-    singleProduct: {},
-  },
+  initialState: [],
+  //   initialState: {
+  //     products: [],
+  //     singleProduct: {},
+  //   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchAllProducts.fulfilled, (state, { payload }) => {
-      state.allProducts = payload
+      return payload
     })
     builder.addCase(fetchSingleProduct.fulfilled, (state, { payload }) => {
       state.singleProduct = payload
@@ -82,6 +87,6 @@ export const productsSlice = createSlice({
     })
   },
 })
-export const selectProducts = (state) => state.allProducts
+export const selectProducts = (state) => state.products
 export const selectSingleProduct = (state) => state.singleProduct
 export default productsSlice.reducer

@@ -4,7 +4,7 @@ import {
   fetchAllProducts,
   selectProducts,
 } from '../store/reducers/productsSlice'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 function AllProducts() {
   const dispatch = useDispatch()
@@ -13,7 +13,7 @@ function AllProducts() {
   useEffect(() => {
     dispatch(fetchAllProducts())
   }, [dispatch])
-
+  console.log('products', products)
   return (
     <>
       <div>AllProducts</div>
