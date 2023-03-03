@@ -1,3 +1,4 @@
+
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
@@ -8,6 +9,7 @@ import { me } from "./store";
 import UserProfile from "./components/UserProfile";
 import AllProducts from "./components/AllProducts";
 import SingleProduct from "./components/SingleProduct";
+
 /**
  * COMPONENT
  */
@@ -65,3 +67,4 @@ const mapDispatch = (dispatch) => {
 // // The `withRouter` wrapper makes sure that updates are not blocked
 // // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes));
+
