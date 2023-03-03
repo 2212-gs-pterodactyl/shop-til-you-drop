@@ -8,6 +8,7 @@ import { me } from "./store";
 import UserProfile from "./components/UserProfile";
 import AllProducts from "./components/AllProducts";
 import SingleProduct from "./components/SingleProduct";
+import OrderSummary from "./components/OrderSummary";
 
 /**
  * COMPONENT
@@ -22,6 +23,7 @@ class Routes extends Component {
     return (
       <div>
         <Switch>
+          <Route path="/orders/:id" component={OrderSummary} />
           <Route path="/products/:id" component={SingleProduct} />
           <Route path="/users/:id" component={UserProfile} />
           <Route path="/cart" component={Cart} />
