@@ -4,7 +4,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchCart = createAsyncThunk("cart", async ()=>{
     try {
-        const {data} = axios.get("/api/orders")
+        const {data} = await axios.get("/api/orders")
+        console.log("DATA", data)
         return data;
     } catch (error) {
         console.log(error)

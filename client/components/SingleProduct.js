@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   fetchSingleProduct,
-  singleProductState,
+  selectSingleProduct,
 } from "../store/reducers/productsSlice";
 
 const singleProduct = () => {
@@ -24,7 +24,8 @@ const singleProduct = () => {
   // ADD TO CART COMPONENENT
 
   //for displaying single product information
-  const product = useSelector(singleProductState);
+  const product = useSelector(selectSingleProduct);
+  console.log(product)
 
   //for count state of product quantity b4 adding to car--> default Quantity: 1
 
