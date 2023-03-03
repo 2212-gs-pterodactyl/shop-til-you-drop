@@ -1,12 +1,14 @@
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect } from "react-router-dom";
-import { Login, Signup } from "./components/AuthForm";
-import Cart from "./components/Cart";
-import Home from "./components/Home";
-import { me } from "./store";
-import UserProfile from "./components/UserProfile";
-import singleProduct from "./components/SingleProduct";
+
+import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { Login, Signup } from './components/AuthForm'
+import Cart from './components/Cart'
+import Home from './components/Home'
+import { me } from './store'
+import UserProfile from './components/UserProfile'
+import singleProduct from './components/SingleProduct'
+import AllProducts from './components/AllProducts'
 
 /**
  * COMPONENT
@@ -22,6 +24,7 @@ class Routes extends Component {
       <div>
         <Switch>
           <Route path="/cart" component={Cart} />
+          <Route path="/products" component={AllProducts} />
           <Route path="/" component={UserProfile} />
         </Switch>
         {isLoggedIn ? (
@@ -62,4 +65,6 @@ const mapDispatch = (dispatch) => {
 
 // // The `withRouter` wrapper makes sure that updates are not blocked
 // // when the url changes
+
 export default withRouter(connect(mapState, mapDispatch)(Routes));
+
