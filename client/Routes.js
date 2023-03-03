@@ -22,9 +22,7 @@ class Routes extends Component {
       <div>
         <Switch>
           <Route path="/cart" component={Cart} />
-          <Route path="/users/:id" component={UserProfile} />
-          {/* <Route path="/" component={UserProfile} /> */}
-          {/*  We need a home page ^^ eventually. */}
+          <Route path="/" component={UserProfile} />
         </Switch>
         {isLoggedIn ? (
           <Switch>
