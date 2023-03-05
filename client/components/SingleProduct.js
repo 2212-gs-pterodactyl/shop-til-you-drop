@@ -5,6 +5,7 @@ import {
   fetchSingleProduct,
   selectSingleProduct,
 } from "../store/reducers/singleProductSlice";
+import { changeCounter, counterState } from "../store/reducers/counterSlice";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
@@ -12,12 +13,19 @@ const SingleProduct = () => {
 
   const id = params.id;
   const product = useSelector(selectSingleProduct);
+  const count = useSelector(counterState);
+
+  const increment = () => {
+    dispatch(changeCounter(1));
+  };
+  const decrement = () => {
+    dispatch(changeCounter(-1));
+  };
 
   useEffect(() => {
     dispatch(fetchSingleProduct(id));
   }, [dispatch]);
 
-  console.log(product);
   if (!product.name) return <h2>Loading.....</h2>;
 
   return (
@@ -29,6 +37,12 @@ const SingleProduct = () => {
       <div> Type: {product.type}</div>
       <div> Description: </div>
       <p> {product.description} </p>
+      <div>Select Quantity: {count} </div>
+      <button onClick={increment}> + </button>
+      <button onClick={decrement}> - </button>
+      <button onClick={() => alert(`Added ${count} ${product.name} to Cart`)}>
+        Add to Cart
+      </button>
     </div>
   );
 };
