@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
+import CartItems from "./CartItems";
 
 function NavCart() {
   const [show, setShow] = useState(false);
@@ -20,8 +21,7 @@ function NavCart() {
           <Offcanvas.Title>Your Cart</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Temporary Cart Off canvas function. Waiting on back-end Cart
-          functionality...
+          <CartItems />
           <Button variant="success" onClick={handleClose}>
             <Link to="/checkout" className="stretched-link"></Link>
             Proceed To Checkout

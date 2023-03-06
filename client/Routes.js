@@ -1,15 +1,17 @@
+
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import UserDashboard from "./components/UserDashboard";
 import { me } from "./store";
-import Cart from "./components/Cart";
 import UserProfile from "./components/UserProfile";
 import AllProducts from "./components/AllProducts";
 import SingleProduct from "./components/SingleProduct";
 import OrderSummary from "./components/OrderSummary";
 import Checkout from "./components/Checkout";
+import CartItems from './components/CartItems'
+
 
 const Routes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.id);
@@ -33,7 +35,7 @@ const Routes = () => {
         <Switch>
           <Route path="/products/:id" component={SingleProduct} />
           <Route path="/users/:id" component={UserProfile} />
-          <Route path="/cart" component={Cart} />
+          <Route path="/cart" component={CartItems} />
           <Route path="/products" component={AllProducts} />
           <Route path="/checkout" component={Checkout} />
           <Route path="/login">{Login}</Route>

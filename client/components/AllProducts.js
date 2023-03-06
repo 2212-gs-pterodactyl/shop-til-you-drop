@@ -10,18 +10,14 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { selectCart, addToCartAsync } from "../store/reducers/cartSlice";
-// import { selectUser } from '../store/reducers/userSlice'
+import { addToCartAsync } from "../store/reducers/cartSlice";
 
 function AllProducts() {
   const dispatch = useDispatch();
   const products = useSelector(selectProducts);
   const id = useSelector((state) => state.auth.id);
-  // const user = useSelector(selectUser)
 
-  console.log("id--->", id);
   const cart = useSelector((state) => state.cart);
-  console.log("cart state-->", cart);
 
   useEffect(() => {
     dispatch(fetchAllProducts());
