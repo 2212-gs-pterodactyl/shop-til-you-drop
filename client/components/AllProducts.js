@@ -28,7 +28,7 @@ function AllProducts() {
         <Row>
           {products.map((product) => (
             <Col xs={3} className="mb-5" key={product.id}>
-              <Card style={{ width: "18rem" }}>
+              <Card className="all-prod" style={{ width: "18rem" }}>
                 <Link
                   to={`/products/${product.id}`}
                   className="stretched-link"
