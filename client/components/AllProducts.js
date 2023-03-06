@@ -1,25 +1,31 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {
   fetchAllProducts,
   selectProducts,
-} from "../store/reducers/productsSlice";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+} from '../store/reducers/productsSlice'
+import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import { selectCart, addToCartAsync } from '../store/reducers/cartSlice'
+// import { selectUser } from '../store/reducers/userSlice'
 
 function AllProducts() {
-  const dispatch = useDispatch();
-  const products = useSelector(selectProducts);
-  const cart = useSelector((state) => state.cart);
-  console.log("cart state-->", cart);
+  const dispatch = useDispatch()
+  const products = useSelector(selectProducts)
+  const id = useSelector((state) => state.auth.id)
+  // const user = useSelector(selectUser)
+
+  console.log('id--->', id)
+  const cart = useSelector((state) => state.cart)
+  console.log('cart state-->', cart)
 
   useEffect(() => {
-    dispatch(fetchAllProducts());
-  }, [dispatch]);
+    dispatch(fetchAllProducts())
+  }, [dispatch])
 
   return (
     <>
@@ -28,7 +34,7 @@ function AllProducts() {
         <Row>
           {products.map((product) => (
             <Col xs={3} className="mb-5" key={product.id}>
-              <Card className="all-prod" style={{ width: "18rem" }}>
+              <Card className="all-prod" style={{ width: '18rem' }}>
                 <Link
                   to={`/products/${product.id}`}
                   className="stretched-link"
@@ -45,7 +51,16 @@ function AllProducts() {
               <Button
                 className="mt-3"
                 variant="info"
-                onClick={() => alert("Added to Cart")}
+                onClick={() =>
+                  dispatch(
+                    addToCartAsync({
+                      name: product.name,
+                      price: product.price,
+                      qty: 1,
+                      id: id,
+                    })
+                  )
+                }
               >
                 Add to Cart
               </Button>
@@ -54,7 +69,7 @@ function AllProducts() {
         </Row>
       </Container>
     </>
-  );
+  )
 }
 
-export default AllProducts;
+export default AllProducts
