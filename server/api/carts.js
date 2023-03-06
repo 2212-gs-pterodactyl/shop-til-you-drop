@@ -17,7 +17,8 @@ router.get('/:id', async (req, res, next) => {
 // POST api/carts/:id
 router.post('/:id', async (req, res, next) => {
   try {
-    res.status(201).send(await Cart.create(req.body))
+    console.log('inside cart route backend', req.body)
+    res.status(201).send(await CartProduct.create(req.body))
   } catch (error) {
     next(error)
   }
