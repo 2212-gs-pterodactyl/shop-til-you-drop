@@ -43,8 +43,8 @@ function AllProducts() {
                 </Card.Body>
               </Card>
               <Button
-                className="text-center btn-lg"
-                variant="success"
+                className="mt-3"
+                variant="info"
                 onClick={() => alert("Added to Cart")}
               >
                 Add to Cart
