@@ -19,9 +19,7 @@ function AllProducts() {
   const id = useSelector((state) => state.auth.id)
   // const user = useSelector(selectUser)
 
-  console.log('id--->', id)
   const cart = useSelector((state) => state.cart)
-  console.log('cart state-->', cart)
 
   useEffect(() => {
     dispatch(fetchAllProducts())

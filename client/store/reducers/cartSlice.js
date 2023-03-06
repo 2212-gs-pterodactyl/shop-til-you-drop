@@ -7,6 +7,18 @@ const initialState = {
   amount: 0,
 }
 
+export const fetchCartAsync = createAsyncThunk(
+  'cart/get',
+  async () => {
+    try {
+      const { data } = await axios.get(`/api/carts/${id}`)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+)
+
 export const addToCartAsync = createAsyncThunk(
   'cart/add',
   async ({ name, price, qty, id }) => {
@@ -55,6 +67,9 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(addToCartAsync.fulfilled, (state, { payload }) => {
       state.cartItems.push(payload)
+    })
+    builder.addCase(fetchCartAsync.fulfilled, (state, { payload }) => {
+      return state.cartItems
     })
   },
 })
