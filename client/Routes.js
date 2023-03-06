@@ -25,6 +25,8 @@ const Routes = () => {
         <Switch>
           <Route path="/home" component={UserDashboard} />
           {/* <Redirect to="/home" /> */}
+          <Route path="/products/:id" component={SingleProduct} />
+          <Route path="/checkout" component={Checkout} />
           <Route path="/" component={AllProducts} />
         </Switch>
       ) : (
