@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import CartItems from "./CartItems";
 
 function NavCart() {
   const [show, setShow] = useState(false);
@@ -19,8 +20,7 @@ function NavCart() {
           <Offcanvas.Title>Your Cart</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Temporary Cart Off canvas function. Waiting on back-end Cart
-          functionality...
+          <CartItems />
           <Button
             variant="success"
             onClick={() => alert("Proceed to checkout page still needs work")}
