@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { Link } from "react-router-dom";
 
 function NavCart() {
   const [show, setShow] = useState(false);
@@ -21,10 +22,8 @@ function NavCart() {
         <Offcanvas.Body>
           Temporary Cart Off canvas function. Waiting on back-end Cart
           functionality...
-          <Button
-            variant="success"
-            onClick={() => alert("Proceed to checkout page still needs work")}
-          >
+          <Button variant="success" onClick={handleClose}>
+            <Link to="/checkout" className="stretched-link"></Link>
             Proceed To Checkout
           </Button>
         </Offcanvas.Body>
