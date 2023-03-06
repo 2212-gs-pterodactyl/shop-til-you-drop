@@ -29,6 +29,10 @@ const SingleProduct = () => {
   };
 
   useEffect(() => {
+    dispatch(changeCounter(-999));
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(fetchSingleProduct(id));
   }, [dispatch]);
 
