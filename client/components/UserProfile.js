@@ -9,10 +9,9 @@ import { useParams, useResolvedPath } from "react-router-dom";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  // const { id } = useParams();
+  const id = useSelector(state => state.auth.id)
   const user = useSelector(selectUser);
-  console.log("UserCMP.11, id========", id);
-  console.log("userCMP.12, user======", user);
 
   useEffect(() => {
     dispatch(fetchOneUserAsync(id));

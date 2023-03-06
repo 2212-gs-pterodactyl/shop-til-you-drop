@@ -9,19 +9,19 @@ const SALT_ROUNDS = 5;
 const User = db.define("user", {
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-      notNull: { msg: "first name is required" },
-    },
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: true,
+    //   notNull: { msg: "first name is required" },
+    // },
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-      notNull: { msg: "last name is required" },
-    },
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: true,
+    //   notNull: { msg: "last name is required" },
+    // },
   },
   email: {
     type: Sequelize.STRING,
@@ -71,10 +71,10 @@ User.prototype.generateToken = function () {
 /**
  * classMethods
  */
-User.authenticate = async function ({ username, password }) {
-  const user = await this.findOne({ where: { username } });
+User.authenticate = async function ({ email, password }) {
+  const user = await this.findOne({ where: { email } });
   if (!user || !(await user.correctPassword(password))) {
-    const error = Error("Incorrect username/password");
+    const error = Error("Incorrect email/password");
     error.status = 401;
     throw error;
   }
