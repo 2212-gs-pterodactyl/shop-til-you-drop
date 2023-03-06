@@ -1,29 +1,27 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   fetchAllProducts,
   selectProducts,
-} from '../store/reducers/productsSlice'
-import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import { selectCart, addToCartAsync } from '../store/reducers/cartSlice'
-// import { selectUser } from '../store/reducers/userSlice'
+} from "../store/reducers/productsSlice";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { addToCartAsync } from "../store/reducers/cartSlice";
 
 function AllProducts() {
-  const dispatch = useDispatch()
-  const products = useSelector(selectProducts)
-  const id = useSelector((state) => state.auth.id)
-  // const user = useSelector(selectUser)
+  const dispatch = useDispatch();
+  const products = useSelector(selectProducts);
+  const id = useSelector((state) => state.auth.id);
 
-  const cart = useSelector((state) => state.cart)
+  const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
-    dispatch(fetchAllProducts())
-  }, [dispatch])
+    dispatch(fetchAllProducts());
+  }, [dispatch]);
 
   return (
     <>
@@ -32,7 +30,7 @@ function AllProducts() {
         <Row>
           {products.map((product) => (
             <Col xs={3} className="mb-5" key={product.id}>
-              <Card className="all-prod" style={{ width: '18rem' }}>
+              <Card className="all-prod" style={{ width: "18rem" }}>
                 <Link
                   to={`/products/${product.id}`}
                   className="stretched-link"
@@ -67,7 +65,7 @@ function AllProducts() {
         </Row>
       </Container>
     </>
-  )
+  );
 }
 
-export default AllProducts
+export default AllProducts;

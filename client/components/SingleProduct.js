@@ -6,6 +6,7 @@ import {
   selectSingleProduct,
 } from "../store/reducers/singleProductSlice";
 import { changeCounter, counterState } from "../store/reducers/counterSlice";
+import { selectCart, addToCartAsync } from "../store/reducers/cartSlice";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
@@ -16,10 +17,13 @@ import Badge from "react-bootstrap/Badge";
 const SingleProduct = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  const UserId = useSelector((state) => state.auth.id);
 
   const id = params.id;
   const product = useSelector(selectSingleProduct);
   const count = useSelector(counterState);
+  const cart = useSelector((state) => state.cart);
+  console.log("cart state-->", cart);
 
   const increment = () => {
     dispatch(changeCounter(1));
@@ -106,7 +110,14 @@ const SingleProduct = () => {
                 <Button
                   variant="info"
                   onClick={() =>
-                    alert(`Added ${count} ${product.name} to Cart`)
+                    dispatch(
+                      addToCartAsync({
+                        name: product.name,
+                        price: product.price,
+                        qty: count,
+                        id: UserId,
+                      })
+                    )
                   }
                 >
                   Add to Cart

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { Link } from "react-router-dom";
 import CartItems from "./CartItems";
 
 function NavCart() {
@@ -21,10 +22,8 @@ function NavCart() {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <CartItems />
-          <Button
-            variant="success"
-            onClick={() => alert("Proceed to checkout page still needs work")}
-          >
+          <Button variant="success" onClick={handleClose}>
+            <Link to="/checkout" className="stretched-link"></Link>
             Proceed To Checkout
           </Button>
         </Offcanvas.Body>

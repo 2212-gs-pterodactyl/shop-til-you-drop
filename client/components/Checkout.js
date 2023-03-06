@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
@@ -6,8 +6,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import { useSelector, useDispatch } from "react-redux";
+import Badge from "react-bootstrap/Badge";
 
 const Checkout = () => {
+  const cart = useSelector((state) => state.cart.cartItems);
+  console.log("cart state in checkout! -->", cart);
+
   return (
     <div>
       <Container>
@@ -40,12 +45,19 @@ const Checkout = () => {
           </Col>
           <Col md={4} className="mb-4">
             <Card>
-              <Card.Header>Your Cart --Dummy Data--</Card.Header>
+              <Card.Header>Your Cart </Card.Header>
               <ListGroup className="list-group-flush">
-                <ListGroup.Item>Product 1</ListGroup.Item>
-                <ListGroup.Item>Product 2</ListGroup.Item>
-                <ListGroup.Item>Product 3</ListGroup.Item>
-                <ListGroup.Item>Total: $99999</ListGroup.Item>
+                {cart.map((product) => (
+                  <ListGroup.Item key={product.id}>
+                    <div className="d-flex mb-2 justify-content-between">
+                      {product.name}
+                      <Badge pill className="mb-1" bg="warning">
+                        <div>Price: ${product.price}</div>
+                      </Badge>
+                    </div>
+                    <div>Quantity: {product.qty}</div>
+                  </ListGroup.Item>
+                ))}
               </ListGroup>
             </Card>
           </Col>
