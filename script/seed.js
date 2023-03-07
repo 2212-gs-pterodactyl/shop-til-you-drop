@@ -1,25 +1,26 @@
 const { db, User, Product, Order, OrderProduct } = require("../server/db");
 
 const users = [
-  {
+{
     firstName: "Zelma",
     lastName: "Scotchmor",
-    email: "zscotchmor0@google.com.hk",
-    password: "h93VUXnYr",
+    email: "ax@ax.com",
+    password: "ax1234",
     address: "310 Delta Road. Perth Amboy, TX 29861.",
   },
   {
     firstName: "Antin",
     lastName: "Coplestone",
-    email: "acoplestone1@liveinternet.ru",
-    password: "p9VGrxP",
+    email: "admin@admin.com",
+    password: "admin1234",
     address: "135 Sesame Lane. Rowlett, DC 29443.",
+    role: "admin",
   },
   {
-    firstName: "Fionnula",
+    firstName: "Fiona",
     lastName: "Barock",
-    email: "fbarock2@cloudflare.com",
-    password: "8NHEdJXaeV3X",
+    email: "by@by.com",
+    password: "by1234",
     address: "121 Delta Road. Garland, TX 48926.",
   },
   {
