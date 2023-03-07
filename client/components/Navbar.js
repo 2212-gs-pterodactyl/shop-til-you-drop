@@ -17,7 +17,7 @@ const NavBar = () => {
       {isLoggedIn ? (
         <Container>
           <Navbar.Brand>
-            <h2>Dactyl Arboretum</h2>
+            <h2>Dactyl Arboretum 🌱🌱</h2>
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link to="/" as={NavLink}>
@@ -26,8 +26,14 @@ const NavBar = () => {
             <Nav.Link to="/home" as={NavLink}>
               Dashboard
             </Nav.Link>
+            <Nav.Link to="/about" as={NavLink}>
+              About Dactyl
+            </Nav.Link>
+            <Nav.Link to="/careers" as={NavLink}>
+              Careers
+            </Nav.Link>
             <Button href="#" onClick={() => dispatch(logout())}>
-              Logout
+              Log Out
             </Button>
             <NavCart />
           </Nav>
@@ -39,6 +45,13 @@ const NavBar = () => {
             <Nav.Link to="/" as={NavLink}>
               Home
             </Nav.Link>
+            <Nav.Link to="/about" as={NavLink}>
+              About Dactyl
+            </Nav.Link>
+            <Nav.Link to="/careers" as={NavLink}>
+              Careers
+            </Nav.Link>
+
             <Nav.Link to="/login" as={NavLink}>
               Log In
             </Nav.Link>

@@ -45,8 +45,9 @@ const UserProfile = () => {
                 {user.orders.map((elem) => {
                   return (
                     <li key={elem.id}>
-                      Cost: ${elem.totalPrice}; date:{" "}
-                      {elem.createdAt.substring(0, 10)}.
+                      Order #{elem.id} was placed on{" "}
+                      {elem.createdAt.substring(0, 10)}. It cost $
+                      {elem.totalPrice} and was shipped to {elem.shippingInfo}.
                     </li>
                   );
                 })}
