@@ -10,9 +10,8 @@ label {
   display: block;
 }
 
-nav a {
-  display: inline-block;
-  margin: 1em;
+#navbar {
+  background-color: rgb(166, 235, 197);
 }
 
 .all-prod:hover {
