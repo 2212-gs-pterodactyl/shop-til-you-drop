@@ -1,59 +1,59 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams, Link } from 'react-router-dom'
 import {
   fetchSingleProduct,
   selectSingleProduct,
-} from "../store/reducers/singleProductSlice";
-import { changeCounter, counterState } from "../store/reducers/counterSlice";
-import { addToCartAsync } from "../store/reducers/cartSlice";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Badge from "react-bootstrap/Badge";
-import { ToastContainer, toast } from "react-toastify";
+} from '../store/reducers/singleProductSlice'
+import { changeCounter, counterState } from '../store/reducers/counterSlice'
+import { addToCartAsync } from '../store/reducers/cartSlice'
+import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Badge from 'react-bootstrap/Badge'
+import { ToastContainer, toast } from 'react-toastify'
 
 const SingleProduct = () => {
-  const dispatch = useDispatch();
-  const params = useParams();
-  const UserId = useSelector((state) => state.auth.id);
+  const dispatch = useDispatch()
+  const params = useParams()
+  const UserId = useSelector((state) => state.auth.id)
 
-  const id = params.id;
-  const product = useSelector(selectSingleProduct);
-  const count = useSelector(counterState);
-  const cart = useSelector((state) => state.cart);
+  const id = params.id
+  const product = useSelector(selectSingleProduct)
+  const count = useSelector(counterState)
+  const cart = useSelector((state) => state.cart)
 
   const notify = (name) => {
     toast.success(`Added ${name} to your cart.`, {
-      position: "bottom-left",
+      position: 'bottom-left',
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "colored",
-    });
-  };
+      theme: 'colored',
+    })
+  }
 
   const increment = () => {
-    dispatch(changeCounter(1));
-  };
+    dispatch(changeCounter(1))
+  }
   const decrement = () => {
-    dispatch(changeCounter(-1));
-  };
+    dispatch(changeCounter(-1))
+  }
 
   useEffect(() => {
-    dispatch(changeCounter(-999));
-  }, [dispatch]);
+    dispatch(changeCounter(-999))
+  }, [dispatch])
 
   useEffect(() => {
-    dispatch(fetchSingleProduct(id));
-  }, [dispatch]);
+    dispatch(fetchSingleProduct(id))
+  }, [dispatch])
 
-  if (!product.name) return <h2>Loading.....</h2>;
+  if (!product.name) return <h2>Loading.....</h2>
 
   return (
     <Container>
@@ -105,8 +105,8 @@ const SingleProduct = () => {
                     size="sm"
                     onClick={increment}
                   >
-                    {" "}
-                    +{" "}
+                    {' '}
+                    +{' '}
                   </Button>
                   Quantity: {count}
                   <Button
@@ -115,7 +115,7 @@ const SingleProduct = () => {
                     size="sm"
                     onClick={decrement}
                   >
-                    {" "}
+                    {' '}
                     -
                   </Button>
                 </a>
@@ -125,13 +125,13 @@ const SingleProduct = () => {
                   onClick={() => {
                     dispatch(
                       addToCartAsync({
-                        name: product.name,
+                        productId: product.id,
                         price: product.price,
-                        qty: count,
+                        qty: 1,
                         id: UserId,
                       })
-                    );
-                    notify(product.name);
+                    )
+                    notify(product.name)
                   }}
                 >
                   Add to Cart
@@ -143,7 +143,7 @@ const SingleProduct = () => {
       </Row>
       <ToastContainer />
     </Container>
-  );
-};
+  )
+}
 
-export default SingleProduct;
+export default SingleProduct
