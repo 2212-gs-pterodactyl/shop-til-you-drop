@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import UserDashboard from "./components/UserDashboard";
 import { me } from "./store";
@@ -10,6 +10,7 @@ import SingleProduct from "./components/SingleProduct";
 import OrderSummary from "./components/OrderSummary";
 import Checkout from "./components/Checkout";
 import CartItems from "./components/CartItems";
+import PageNotFound from "./components/PageNotFound";
 
 const Routes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.id);
@@ -23,24 +24,30 @@ const Routes = () => {
     <div>
       {isLoggedIn ? (
         <Switch>
-          <Route path="/home" component={UserDashboard} />
+          <Route exact path="/home" component={UserDashboard} />
           {/* <Redirect to="/home" /> */}
-          <Route path="/products/:id" component={SingleProduct} />
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/ordersummary" component={OrderSummary} />
-          <Route path="/" component={AllProducts} />
+          <Route exact path="/products/:id" component={SingleProduct} />
+          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/ordersummary" component={OrderSummary} />
+          <Route exact path="/" component={AllProducts} />
+          <Route exact path="/*" component={PageNotFound} />
         </Switch>
       ) : (
         <Switch>
-          <Route path="/products/:id" component={SingleProduct} />
-          <Route path="/users/:id" component={UserProfile} />
-          <Route path="/cart" component={CartItems} />
-          <Route path="/products" component={AllProducts} />
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/login">{Login}</Route>
-          <Route path="/signup">{Signup} </Route>
-          <Route path="/ordersummary" component={OrderSummary} />
-          <Route path="/" component={AllProducts} />
+          <Route exact path="/products/:id" component={SingleProduct} />
+          <Route exact path="/users/:id" component={UserProfile} />
+          <Route exact path="/cart" component={CartItems} />
+          <Route exact path="/products" component={AllProducts} />
+          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/login">
+            {Login}
+          </Route>
+          <Route exact path="/signup">
+            {Signup}{" "}
+          </Route>
+          <Route exact path="/ordersummary" component={OrderSummary} />
+          <Route exact path="/" component={AllProducts} />
+          <Route path="/*" component={PageNotFound} />
         </Switch>
       )}
     </div>
