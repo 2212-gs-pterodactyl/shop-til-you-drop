@@ -82,6 +82,7 @@ const EditUserCMP = () => {
         <input
           name="email"
           value={email}
+          size="39"
           onChange={(e) => setEmail(e.target.value)}
         />
         <br></br> <br></br>
@@ -91,6 +92,7 @@ const EditUserCMP = () => {
         <input
           name="password"
           type="password"
+          size="47"
           onChange={(e) => setPassword(e.target.value)}
         />
         <br></br>
@@ -98,6 +100,7 @@ const EditUserCMP = () => {
         <label htmlFor="address">Update physical address:</label>
         <input
           name="address"
+          size="50"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
