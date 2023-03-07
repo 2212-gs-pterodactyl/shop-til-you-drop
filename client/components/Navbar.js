@@ -17,7 +17,7 @@ const NavBar = () => {
       {isLoggedIn ? (
         <Container>
           <Navbar.Brand>
-            <h2>Shop Till You Drop</h2>
+            <h2>Dactyl Arboretum</h2>
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link to="/" as={NavLink}>
@@ -34,13 +34,13 @@ const NavBar = () => {
         </Container>
       ) : (
         <Container>
-          <Navbar.Brand>Shop Till You Drop</Navbar.Brand>
+          <Navbar.Brand>Dactyl Arboretum</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link to="/" as={NavLink}>
               Home
             </Nav.Link>
             <Nav.Link to="/login" as={NavLink}>
-              Login
+              Log In
             </Nav.Link>
             <Nav.Link to="/signup" as={NavLink}>
               Sign Up
