@@ -22,10 +22,11 @@ function NavCart() {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <CartItems />
-          <Button variant="success" onClick={handleClose}>
-            <Link to="/checkout" className="stretched-link"></Link>
-            Proceed To Checkout
-          </Button>
+          <Link to="/checkout">
+            <Button variant="success" onClick={handleClose}>
+              Proceed To Checkout
+            </Button>
+          </Link>
         </Offcanvas.Body>
       </Offcanvas>
     </>

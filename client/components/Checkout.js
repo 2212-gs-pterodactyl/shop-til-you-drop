@@ -8,6 +8,7 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import { useSelector, useDispatch } from "react-redux";
 import Badge from "react-bootstrap/Badge";
+import { Link } from "react-router-dom";
 
 const Checkout = () => {
   const cart = useSelector((state) => state.cart.cartItems);
@@ -38,9 +39,11 @@ const Checkout = () => {
                 <Form.Label>Zip Code</Form.Label>
                 <Form.Control type="text" placeholder="Enter Zip Code" />
               </Form.Group>
-              <Button variant="primary" type="submit">
-                Checkout
-              </Button>
+              <Link to="/ordersummary">
+                <Button variant="primary" type="submit">
+                  Checkout
+                </Button>
+              </Link>
             </Form>
           </Col>
           <Col md={4} className="mb-4">
