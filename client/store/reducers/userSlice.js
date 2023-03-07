@@ -14,12 +14,30 @@ export const fetchOneUserAsync = createAsyncThunk(
   }
 );
 
+export const editUserAsync = createAsyncThunk(
+  "users/editOne",
+  async ({ firstName, lastName, email, password, address, id }) => {
+    const { data } = await axios.put(`/api/users/${id}`, {
+      firstName,
+      lastName,
+      email,
+      password,
+      address,
+      id,
+    });
+    return data;
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState: {},
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchOneUserAsync.fulfilled, (state, action) => {
+      return action.payload;
+    });
+    builder.addCase(editUserAsync.fulfilled, (state, action) => {
       return action.payload;
     });
   },
