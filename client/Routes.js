@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
@@ -10,8 +9,7 @@ import AllProducts from "./components/AllProducts";
 import SingleProduct from "./components/SingleProduct";
 import OrderSummary from "./components/OrderSummary";
 import Checkout from "./components/Checkout";
-import CartItems from './components/CartItems'
-
+import CartItems from "./components/CartItems";
 
 const Routes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.id);
@@ -29,6 +27,7 @@ const Routes = () => {
           {/* <Redirect to="/home" /> */}
           <Route path="/products/:id" component={SingleProduct} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/ordersummary" component={OrderSummary} />
           <Route path="/" component={AllProducts} />
         </Switch>
       ) : (
@@ -40,7 +39,7 @@ const Routes = () => {
           <Route path="/checkout" component={Checkout} />
           <Route path="/login">{Login}</Route>
           <Route path="/signup">{Signup} </Route>
-          <Route path="/orders/:id" component={OrderSummary} />
+          <Route path="/ordersummary" component={OrderSummary} />
           <Route path="/" component={AllProducts} />
         </Switch>
       )}

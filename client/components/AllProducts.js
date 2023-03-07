@@ -11,13 +11,26 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { addToCartAsync } from "../store/reducers/cartSlice";
+import { ToastContainer, toast } from "react-toastify";
+import Filter from "./Filter";
 
 function AllProducts() {
   const dispatch = useDispatch();
   const products = useSelector(selectProducts);
   const id = useSelector((state) => state.auth.id);
 
-  const cart = useSelector((state) => state.cart);
+  const notify = (name) => {
+    toast.success(`Added ${name} to your cart.`, {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
 
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -25,6 +38,7 @@ function AllProducts() {
 
   return (
     <>
+      <Filter />
       <h1 className="text-center mb-5">All Products</h1>
       <Container>
         <Row>
@@ -38,16 +52,15 @@ function AllProducts() {
                 <Card.Img variant="top" src={product.img_URL} />
                 <Card.Body>
                   <Card.Title>{product.name}</Card.Title>
-                  <Card.Text>
-                    <div>Size: {product.size}</div>
-                    <div>Price: ${product.price}</div>
-                  </Card.Text>
+                  <div>Size: {product.size}</div>
+                  <div>Price: ${product.price}</div>
                 </Card.Body>
               </Card>
+
               <Button
                 className="mt-3"
                 variant="info"
-                onClick={() =>
+                onClick={() => {
                   dispatch(
                     addToCartAsync({
                       name: product.name,
@@ -55,8 +68,9 @@ function AllProducts() {
                       qty: 1,
                       id: id,
                     })
-                  )
-                }
+                  );
+                  notify(product.name);
+                }}
               >
                 Add to Cart
               </Button>
@@ -64,6 +78,7 @@ function AllProducts() {
           ))}
         </Row>
       </Container>
+      <ToastContainer />
     </>
   );
 }
