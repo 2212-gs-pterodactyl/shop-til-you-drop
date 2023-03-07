@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
@@ -11,8 +11,19 @@ import Badge from "react-bootstrap/Badge";
 import { Link } from "react-router-dom";
 
 const Checkout = () => {
+  const [total, setTotal] = useState(0);
   const cart = useSelector((state) => state.cart.cartItems);
-  console.log("cart state in checkout! -->", cart);
+
+  let newTotal = 0;
+
+  const updateTotal = (price, qty) => {
+    let product = price * qty;
+    newTotal += product;
+  };
+
+  useEffect(() => {
+    setTotal(newTotal);
+  }, []);
 
   return (
     <div>
@@ -59,8 +70,10 @@ const Checkout = () => {
                       </Badge>
                     </div>
                     <div>Quantity: {product.qty}</div>
+                    {updateTotal(product.price, product.qty)}
                   </ListGroup.Item>
                 ))}
+                <ListGroup.Item>Total: ${total}</ListGroup.Item>
               </ListGroup>
             </Card>
           </Col>
