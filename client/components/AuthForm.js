@@ -70,25 +70,24 @@
 // export const Login = connect(mapLogin, mapDispatch)(AuthForm);
 // export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
 
-
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import {authenticate} from '../store'
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { authenticate } from "../store";
 
 /**
  * COMPONENT
  */
 const AuthForm = ({ name, displayName }) => {
-  const { error } = useSelector(state => state.auth)
-  const dispatch = useDispatch()
+  const { error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {
-    evt.preventDefault()
-    const formName = evt.target.name
-    const email = evt.target.email.value
-    const password = evt.target.password.value
-    dispatch(authenticate(email, password, formName))
-  }
+    evt.preventDefault();
+    const formName = evt.target.name;
+    const email = evt.target.email.value;
+    const password = evt.target.password.value;
+    dispatch(authenticate(email, password, formName));
+  };
 
   return (
     <div>
@@ -107,12 +106,24 @@ const AuthForm = ({ name, displayName }) => {
         </div>
         <div>
           <button type="submit">{displayName}</button>
+          {displayName === "Sign Up" ? (
+            <div>
+              {" "}
+              <i>
+                Registration only requires email and password, where password
+                length is between 6 and 180 characters. After registration,
+                visit your dashboard to log your information.
+              </i>{" "}
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
     </div>
-  )
-}
+  );
+};
 
-export const Login = <AuthForm name="login" displayName="Login" />
-export const Signup = <AuthForm name="signup" displayName="Sign Up" />
+export const Login = <AuthForm name="login" displayName="Login" />;
+export const Signup = <AuthForm name="signup" displayName="Sign Up" />;

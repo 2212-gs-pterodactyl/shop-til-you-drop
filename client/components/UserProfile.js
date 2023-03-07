@@ -25,9 +25,16 @@ const UserProfile = () => {
     <div id="one-user">
       {user && user.fullName ? (
         <>
-          <h2>
-            MEMBER INFO FOR SHOPPER #{id}: {user.fullName}.
-          </h2>
+          {user.firstName !== null ? (
+            <h3>
+              MEMBER INFO FOR SHOPPER #{id}: {user.fullName}.
+            </h3>
+          ) : (
+            <h3>
+              <i>Member info for shopper #{id}:</i>
+            </h3>
+          )}
+
           <h4> • Email: {user.email}. </h4>
           <h4> • Physical address: {user.address} </h4>
           <EditUserCMP />
@@ -36,7 +43,12 @@ const UserProfile = () => {
               Order history:
               <ul>
                 {user.orders.map((elem) => {
-                  return <li key={elem.id}>${elem.totalPrice}</li>;
+                  return (
+                    <li key={elem.id}>
+                      Cost: ${elem.totalPrice}; date:{" "}
+                      {elem.createdAt.substring(0, 10)}.
+                    </li>
+                  );
                 })}
               </ul>
             </div>
@@ -44,8 +56,7 @@ const UserProfile = () => {
             <h4>
               {" "}
               <i>
-                {" "}
-                {user.firstName} hasn't made any purchases yet. Perhaps{" "}
+                Order history: the story hasn't been written yet! Perhaps{" "}
                 <Link to={`/products/${roulette}`}>this</Link> could be the
                 first one?
               </i>
@@ -53,42 +64,9 @@ const UserProfile = () => {
           )}
         </>
       ) : (
-        <h2>Welp. We haven't got a user with an id of {id}.</h2>
+        <h2>Unfortunately we haven't got a user with id = {id}.</h2>
       )}
     </div>
   );
 };
 export default UserProfile;
-
-/////////////////
-/* FOR GUIDANCE/INSPO:
-
-  return (
-    <div id="one-user">
-      {student && student.firstName ? (
-        <>
-          <img src={student.imageUrl} />
-          <h1>
-            Student #{id}: {student.firstName} {student.lastName}.
-          </h1>
-          <h2>Email: {student.email}</h2>
-          <h2>GPA: {student.gpa}</h2>
-          {student.campus ? (
-            <h3>
-              Attends{" "}
-              <Link to={`/campuses/${student.campus.id}`}>
-                {" "}
-                {student.campus.name}
-              </Link>
-              , whose campus ID is {student.campus.id}.
-            </h3>
-          ) : (
-            <h3>{student.firstName} is too cool for school.</h3>
-          )}{" "}
-        </>
-      ) : (
-        <h2>We haven't got a student with id = {id}.</h2>
-      )}{" "}
-    </div>
-  );
-}; */
