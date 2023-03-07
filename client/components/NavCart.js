@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import { Link } from "react-router-dom";
-import CartItems from "./CartItems";
-import { selectCart } from "../store/reducers/cartSlice";
-import { useSelector } from "react-redux";
+import React, { useState } from 'react'
+import Button from 'react-bootstrap/Button'
+import Offcanvas from 'react-bootstrap/Offcanvas'
+import { Link } from 'react-router-dom'
+import CartItems from './CartItems'
+import { selectCart } from '../store/reducers/cartSlice'
+import { useSelector } from 'react-redux'
 
 function NavCart() {
-  const [show, setShow] = useState(false);
-  const cart = useSelector(selectCart);
+  const [show, setShow] = useState(false)
+  const cart = useSelector(selectCart)
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   return (
     <>
       <Button
         variant="outline-dark"
         onClick={handleShow}
-        style={{ width: "3rem", height: "3rem", position: "relative" }}
+        style={{ width: '3rem', height: '3rem', position: 'relative' }}
         className="rounded-circle"
       >
         <svg
@@ -31,16 +31,16 @@ function NavCart() {
         <div
           className="rounded-circle bg-danger d-flex justify-content-center align-items-center"
           style={{
-            color: "white",
-            width: "1.5rem",
-            height: "1.5rem",
-            position: "absolute",
+            color: 'white',
+            width: '1.5rem',
+            height: '1.5rem',
+            position: 'absolute',
             bottom: 0,
             right: 0,
-            transform: "translate(25%, 25%)",
+            transform: 'translate(25%, 25%)',
           }}
         >
-          {cart.cartItems.length}
+          {cart.length}
         </div>
       </Button>
 
@@ -58,7 +58,7 @@ function NavCart() {
         </Offcanvas.Body>
       </Offcanvas>
     </>
-  );
+  )
 }
 
-export default NavCart;
+export default NavCart
