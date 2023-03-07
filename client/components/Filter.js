@@ -19,8 +19,8 @@ function Filter() {
   const handleShow = () => setShow(true);
 
   return (
-    <div className="m-auto">
-      <Button variant="warning" onClick={handleShow} size="lg">
+    <div className="fixed-top mt-2">
+      <Button variant="danger" onClick={handleShow} size="lg">
         Filter
       </Button>
       <Offcanvas placement="start" show={show} onHide={handleClose}>
