@@ -146,7 +146,7 @@ const products = [
     price: 1806,
     inCart: true,
     description:
-      "Plant-world-seeds.com says: ​​Startlingly gentian-blue flower open on this bright, drought-tolerant gem that comes not just from the Havana area of Cuba but also the rocky pinelands of the Caribbean area, including South Florida. This dazzling blue "Skullcap" is a dependable choice for well-drained locations in full to part sun.",
+      "Plant-world-seeds.com says: ​​Startlingly gentian-blue flower open on this bright, drought-tolerant gem that comes not just from the Havana area of Cuba but also the rocky pinelands of the Caribbean area, including South Florida. This dazzling blue Skullcap is a dependable choice for well-drained locations in full to part sun.",
     inventory: 17,
     img_URL: "http://dummyimage.com/240x240.png/dddddd/000000",
     type: "indoor",
