@@ -6,13 +6,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Badge from "react-bootstrap/Badge";
 import { Link } from "react-router-dom";
 
 const Checkout = () => {
   const [total, setTotal] = useState(0);
   const cart = useSelector((state) => state.cart.cartItems);
+  console.log("THIS IS CART ITEMS", cart);
 
   let newTotal = 0;
 

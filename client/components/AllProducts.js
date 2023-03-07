@@ -12,6 +12,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { addToCartAsync } from "../store/reducers/cartSlice";
 import { ToastContainer, toast } from "react-toastify";
+import Filter from "./Filter";
 
 function AllProducts() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function AllProducts() {
   return (
     <>
       <h1 className="text-center mb-5">All Products</h1>
+      <Filter className="ml-3" />
       <Container>
         <Row>
           {products.map((product) => (
