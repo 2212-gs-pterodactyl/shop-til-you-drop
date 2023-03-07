@@ -20,12 +20,12 @@ function Filter() {
 
   return (
     <div className="fixed-top mt-2">
-      <Button variant="danger" onClick={handleShow} size="lg">
+      <Button variant="warning" onClick={handleShow} size="lg">
         Filter
       </Button>
       <Offcanvas placement="start" show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Filter</Offcanvas.Title>
+          <Offcanvas.Title>Filters</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           Filter by size:
