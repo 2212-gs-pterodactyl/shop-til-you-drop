@@ -6,20 +6,37 @@ import {
   selectSingleProduct,
 } from "../store/reducers/singleProductSlice";
 import { changeCounter, counterState } from "../store/reducers/counterSlice";
+import { addToCartAsync } from "../store/reducers/cartSlice";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
+import { ToastContainer, toast } from "react-toastify";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  const UserId = useSelector((state) => state.auth.id);
 
   const id = params.id;
   const product = useSelector(selectSingleProduct);
   const count = useSelector(counterState);
+  const cart = useSelector((state) => state.cart);
+
+  const notify = (name) => {
+    toast.success(`Added ${name} to your cart.`, {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
 
   const increment = () => {
     dispatch(changeCounter(1));
@@ -105,9 +122,17 @@ const SingleProduct = () => {
 
                 <Button
                   variant="info"
-                  onClick={() =>
-                    alert(`Added ${count} ${product.name} to Cart`)
-                  }
+                  onClick={() => {
+                    dispatch(
+                      addToCartAsync({
+                        name: product.name,
+                        price: product.price,
+                        qty: count,
+                        id: UserId,
+                      })
+                    );
+                    notify(product.name);
+                  }}
                 >
                   Add to Cart
                 </Button>
@@ -116,7 +141,7 @@ const SingleProduct = () => {
           </Card>
         </Col>
       </Row>
-      <Row></Row>
+      <ToastContainer />
     </Container>
   );
 };

@@ -1,13 +1,14 @@
 import React from "react";
 
-import Navbar from "./components/Navbar";
+import NavBar from "./components/Navbar";
 import Routes from "./Routes";
 import "bootstrap/dist/css/bootstrap.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <div>
-      <Navbar />
+      <NavBar />
       <Routes />
     </div>
   );

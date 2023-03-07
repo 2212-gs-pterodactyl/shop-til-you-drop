@@ -1,18 +1,18 @@
 // ## JW
-import axios from "axios";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from 'axios'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 /* These thunks will make ASYNC calls to our server to fetch our data.*/
 export const fetchOneUserAsync = createAsyncThunk(
-  "users/fetchOne",
+  'users/fetchOne',
   async (id) => {
     try {
-      const { data } = await axios.get(`/api/users/${id}`);
-      return data;
+      const { data } = await axios.get(`/api/users/${id}`)
+      return data
     } catch (e) {
-      console.log(e);
+      console.log(e)
     }
   }
-);
+)
 
 export const editUserAsync = createAsyncThunk(
   "users/editOne",
@@ -30,25 +30,23 @@ export const editUserAsync = createAsyncThunk(
 );
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState: {},
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchOneUserAsync.fulfilled, (state, action) => {
+
       return action.payload;
     });
     builder.addCase(editUserAsync.fulfilled, (state, action) => {
       return action.payload;
     });
   },
-});
+})
 
 /* This is a function we will pass to useSelector in our component,
 to read values from our specific slice of redux state. */
-export const selectUser = (state) => {
-  console.log("userSlice.30, state======", state);
-  return state.user;
-  // this is the same "user" that is stuck to the name property in userSlice.
-};
+export const selectUser = (state) => state.user
+// this is the same "user" that is stuck to the name property in userSlice.
 
-export default userSlice.reducer;
+export default userSlice.reducer

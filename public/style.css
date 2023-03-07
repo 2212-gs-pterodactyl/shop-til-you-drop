@@ -10,14 +10,13 @@ label {
   display: block;
 }
 
-nav a {
-  display: inline-block;
-  margin: 1em;
+#navbar {
+  background-color: rgb(166, 235, 197);
 }
 
-form div {
-  margin: 1em;
-  display: inline-block;
+.filter {
+  position: fixed;
+  top: 50%;
 }
 
 .all-prod:hover {
