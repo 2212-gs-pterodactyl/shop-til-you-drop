@@ -38,8 +38,8 @@ function AllProducts() {
 
   return (
     <>
+      <Filter />
       <h1 className="text-center mb-5">All Products</h1>
-      <Filter className="ml-3" />
       <Container>
         <Row>
           {products.map((product) => (

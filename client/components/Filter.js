@@ -19,7 +19,7 @@ function Filter() {
   const handleShow = () => setShow(true);
 
   return (
-    <div className="fixed-top mt-2">
+    <div className="filter">
       <Button variant="warning" onClick={handleShow} size="lg">
         Filter
       </Button>
