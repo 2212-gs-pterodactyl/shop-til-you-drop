@@ -25,15 +25,18 @@ const Routes = () => {
       {isLoggedIn ? (
         <Switch>
           <Route exact path="/home" component={UserDashboard} />
-          {/* <Redirect to="/home" /> */}
+          <Route exact path="/products" component={AllProducts} />
           <Route exact path="/products/:id" component={SingleProduct} />
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/ordersummary" component={OrderSummary} />
           <Route exact path="/" component={AllProducts} />
+          <Route exact path="/login" component={AllProducts} />
+          <Route exact path="/signup" component={AllProducts} />
           <Route exact path="/*" component={PageNotFound} />
         </Switch>
       ) : (
         <Switch>
+          <Route exact path="/products" component={AllProducts} />
           <Route exact path="/products/:id" component={SingleProduct} />
           <Route exact path="/users/:id" component={UserProfile} />
           <Route exact path="/cart" component={CartItems} />
