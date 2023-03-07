@@ -5,13 +5,15 @@ import userSlice, {
   fetchOneUserAsync,
   selectUser,
 } from "../store/reducers/userSlice";
-import { useParams, useResolvedPath } from "react-router-dom";
+import { Link } from "react-router-dom";
+import EditUserCMP from "./EditUserCMP";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
   // const { id } = useParams();
-  const id = useSelector(state => state.auth.id)
+  const id = useSelector((state) => state.auth.id);
   const user = useSelector(selectUser);
+  const roulette = 1 + Math.floor(Math.random() * 25);
 
   useEffect(() => {
     dispatch(fetchOneUserAsync(id));
@@ -23,23 +25,31 @@ const UserProfile = () => {
     <div id="one-user">
       {user && user.fullName ? (
         <>
-          <h1>
-            MEMBER INFO FOR SHOPPER #{id}: {user.fullName}.
-          </h1>
           <h2>
-            [A member should be able to see only his/her own info; but an ADMIN
-            should be able to freely traverse users/4, users/5, users/6 etc.]
+            MEMBER INFO FOR SHOPPER #{id}: {user.fullName}.
           </h2>
-          <h3>Email: {user.email}. </h3>
-          <h3>Cost of past orders: </h3>
+          <h4> • Email: {user.email}. </h4>
+          <h4> • Physical address: {user.address} </h4>
+          <EditUserCMP />
           {user.orders && user.orders[0] ? (
-            <ul>
-              {user.orders.map((elem) => {
-                return <li key={elem.id}>${elem.totalPrice}</li>;
-              })}
-            </ul>
+            <div>
+              Order history:
+              <ul>
+                {user.orders.map((elem) => {
+                  return <li key={elem.id}>${elem.totalPrice}</li>;
+                })}
+              </ul>
+            </div>
           ) : (
-            <h4>$0; {user.firstName} hasn't made any purchases yet.</h4>
+            <h4>
+              {" "}
+              <i>
+                {" "}
+                {user.firstName} hasn't made any purchases yet. Perhaps{" "}
+                <Link to={`/products/${roulette}`}>this</Link> could be the
+                first one?
+              </i>
+            </h4>
           )}
         </>
       ) : (
