@@ -11,6 +11,8 @@ import OrderSummary from "./components/OrderSummary";
 import Checkout from "./components/Checkout";
 import CartItems from "./components/CartItems";
 import PageNotFound from "./components/PageNotFound";
+import About from "./components/About";
+import Careers from "./components/Careers";
 
 const Routes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.id);
@@ -26,6 +28,8 @@ const Routes = () => {
         <Switch>
           <Route exact path="/home" component={UserDashboard} />
           <Route exact path="/products" component={AllProducts} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/careers" component={Careers} />
           <Route exact path="/products/:id" component={SingleProduct} />
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/ordersummary" component={OrderSummary} />
@@ -37,7 +41,10 @@ const Routes = () => {
       ) : (
         <Switch>
           <Route exact path="/products" component={AllProducts} />
+          <Route exact path="/about" component={About} />
           <Route exact path="/products/:id" component={SingleProduct} />
+          <Route exact path="/careers" component={Careers} />
+
           <Route exact path="/users/:id" component={UserProfile} />
           <Route exact path="/cart" component={CartItems} />
           <Route exact path="/products" component={AllProducts} />
