@@ -6,6 +6,7 @@ import NavCart from "./NavCart";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 
 const NavBar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.id);
