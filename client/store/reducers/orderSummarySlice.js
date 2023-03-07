@@ -2,10 +2,10 @@ import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchOrderSummary = createAsyncThunk(
-  "orderSummary",
+  "orderSummary/fetchCart",
   async (id) => {
     try {
-      const { data } = await axios.get(`/api/orders/${id}`);
+      const { data } = await axios.get(`/api/orders/completed/${id}`);
       return data;
     } catch (error) {
       console.log(error);

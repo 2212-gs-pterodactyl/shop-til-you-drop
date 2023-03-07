@@ -134,8 +134,7 @@ const products = [
     size: "L",
     price: 901,
     inCart: true,
-    description:
-      "PDP will make a “vine” addition to your home!",
+    description: "PDP will make a “vine” addition to your home!",
     inventory: 18,
     img_URL: "http://dummyimage.com/240x240.png/cc0000/ffffff",
     type: "outdoor",
@@ -200,8 +199,7 @@ const products = [
     size: "M",
     price: 1194,
     inCart: false,
-    description:
-      "This orchid’s dazzling pink makes it an easy show-stopper.",
+    description: "This orchid’s dazzling pink makes it an easy show-stopper.",
     inventory: 17,
     img_URL: "http://dummyimage.com/240x240.png/cc0000/ffffff",
     type: "indoor",
@@ -255,8 +253,7 @@ const products = [
     size: "S",
     price: 1151,
     inCart: true,
-    description:
-      "These perennial Hawaiian shrubs top out at 20’.",
+    description: "These perennial Hawaiian shrubs top out at 20’.",
     inventory: 19,
     img_URL: "http://dummyimage.com/240x240.png/5fa2dd/ffffff",
     type: "outdoor",
@@ -353,7 +350,15 @@ const products = [
 
 const orders = [
   {
-    totalPrice: 800,
+    state: "cart",
+    totalPrice: 288,
+    shippingInfo: "295JerseyAve",
+    paymentInfo: "949282",
+    userId: 2,
+  },
+  {
+    state: "completed",
+    totalPrice: 2880,
     shippingInfo: "295JerseyAve",
     paymentInfo: "949282",
     userId: 2,
@@ -362,7 +367,16 @@ const orders = [
 
 const orderProducts = [
   {
-    qty: 300,
+    orderId: 1,
+    productId: 2,
+    qty: 1,
+    price: 288,
+  },
+
+  {
+    orderId: 2,
+    productId: 3,
+    qty: 10,
     price: 288,
   },
 ];
@@ -383,7 +397,7 @@ const seed = async () => {
       })
     );
 
-    /*    await Promise.all(
+    await Promise.all(
       orders.map((order) => {
         return Order.create(order);
       })
@@ -393,12 +407,12 @@ const seed = async () => {
       orderProducts.map((orderProduct) => {
         return OrderProduct.create(orderProduct);
       })
-    ); */
+    );
 
-    const canary = await OrderProduct.create(orderProducts[0]);
-    const dragonzord = await Order.create(orders[0]);
+    // const canary = await OrderProduct.create(orderProducts[0]);
+    // const dragonzord = await Order.create(orders[0]);
 
-    await canary.setOrder(dragonzord);
+    // await canary.setOrder(dragonzord);
 
     console.log("Seeding success!");
     db.close();

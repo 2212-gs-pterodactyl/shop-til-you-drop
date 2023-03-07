@@ -63,7 +63,7 @@ function AllProducts() {
                 onClick={() => {
                   dispatch(
                     addToCartAsync({
-                      name: product.name,
+                      productId: product.id,
                       price: product.price,
                       qty: 1,
                       id: id,

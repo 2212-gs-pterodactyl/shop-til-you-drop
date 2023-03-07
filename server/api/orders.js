@@ -1,24 +1,95 @@
-const router = require('express').Router()
-const { Order, OrderProduct, User } = require('../db')
+const router = require("express").Router();
+const { Order, OrderProduct, User } = require("../db");
 
 //GET api/orders/
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
-    const orders = await Order.findAll({ include: User })
-    res.json(orders)
+    const orders = await Order.findAll({ include: User });
+    res.json(orders);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
-//GET api/orders/:id
-router.get('/:id', async (req, res, next) => {
+//GET api/orders/cart/:id
+router.get("/cart/:id", async (req, res, next) => {
   try {
-    const order = await Order.findByPk(req.params.id)
-    res.json(order)
-  } catch (err) {
-    next(err)
+    const cart = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        state: "cart",
+      },
+      include: [OrderProduct],
+    });
+    res.json(cart);
+  } catch (error) {
+    next(error);
   }
-})
+});
 
-module.exports = router
+//POST api/orders/cart/:id
+router.post("/cart/:id", async (req, res, next) => {
+  try {
+    const cart = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        state: "cart",
+      },
+      include: [OrderProduct],
+    });
+
+    if (!cart) {
+      Order.create({
+        userId: req.params.id,
+        state: "cart",
+      });
+    }
+
+    const { id } = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        state: "cart",
+      },
+      include: [OrderProduct],
+    });
+
+    const orderId = id;
+    const { qty, price, productId } = req.body;
+
+    const newCart = await OrderProduct.create({
+      orderId,
+      qty,
+      price,
+      productId,
+    });
+
+    res.json(newCart);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//GET api/orders/completed/:id
+router.get("/completed/:id", async (req, res, next) => {
+  try {
+    const cart = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        state: "completed",
+      },
+      include: [OrderProduct],
+    });
+    res.json(cart);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/completed/:id", async (req, res, next) => {
+  try {
+  } catch (error) {
+    next(error);
+  }
+});
+
+module.exports = router;
