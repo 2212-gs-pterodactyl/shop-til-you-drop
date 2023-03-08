@@ -78,7 +78,7 @@ export const productsSlice = createSlice({
       return payload
     })
     builder.addCase(deleteProductAsync.fulfilled, (state, { payload }) => {
-      return state
+      return state.filter((item) => item.id !== payload.id);
     })
   },
 })
