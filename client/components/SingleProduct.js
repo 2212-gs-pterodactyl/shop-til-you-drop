@@ -19,6 +19,7 @@ const SingleProduct = () => {
   const dispatch = useDispatch()
   const params = useParams()
   const UserId = useSelector((state) => state.auth.id)
+  const isLoggedIn = useSelector((state) => !!state.auth.id)
 
   const id = params.id
   const product = useSelector(selectSingleProduct)
@@ -97,46 +98,53 @@ const SingleProduct = () => {
               <Card.Text className="text-secondary">
                 {product.description}
               </Card.Text>
-              <div className="d-flex mb-2 justify-content-between">
-                <a>
-                  <Button
-                    className="m-1"
-                    variant="outline-dark"
-                    size="sm"
-                    onClick={decrement}
-                  >
-                    {' '}
-                    -{' '}
-                  </Button>
-                  Quantity: {count}
-                  <Button
-                    className="m-1"
-                    variant="outline-dark"
-                    size="sm"
-                    onClick={increment}
-                  >
-                    {' '}
-                    +
-                  </Button>
-                </a>
+              {isLoggedIn ? (
+                <div className="d-flex mb-2 justify-content-between">
+                  <a>
+                    <Button
+                      className="m-1"
+                      variant="outline-dark"
+                      size="sm"
+                      onClick={decrement}
+                    >
+                      {' '}
+                      -{' '}
+                    </Button>
+                    Quantity: {count}
+                    <Button
+                      className="m-1"
+                      variant="outline-dark"
+                      size="sm"
+                      onClick={increment}
+                    >
+                      {' '}
+                      +
+                    </Button>
+                  </a>
 
-                <Button
-                  variant="info"
-                  onClick={() => {
-                    dispatch(
-                      addToCartAsync({
-                        productId: product.id,
-                        price: product.price,
-                        qty: count,
-                        id: UserId,
-                      })
-                    )
-                    notify(product.name)
-                  }}
-                >
-                  Add to Cart
-                </Button>
-              </div>
+                  <Button
+                    variant="info"
+                    onClick={() => {
+                      dispatch(
+                        addToCartAsync({
+                          productId: product.id,
+                          price: product.price,
+                          qty: count,
+                          id: UserId,
+                        })
+                      )
+                      notify(product.name)
+                    }}
+                  >
+                    Add to Cart
+                  </Button>
+                </div>
+              ) : (
+                <p>
+                  <Link to="/login">Log in</Link> or{' '}
+                  <Link to="/signup">Sign Up </Link>to Purchase
+                </p>
+              )}
             </Card.Body>
           </Card>
         </Col>
