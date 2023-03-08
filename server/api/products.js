@@ -23,6 +23,36 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+//POST api/products
+router.post('/', async (req, res, next) => {
+  try {
+    res.status(201).send(await Product.create(req.body))
+  } catch (error) {
+    next(error)
+  }
+})
+
+//PUT api/products/:id
+router.put('/:id', async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(req.params.id)
+    res.send(await product.update(req.body))
+  } catch (error) {
+    next(error)
+  }
+})
+
+// DELETE /api/campuses/:id
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(req.params.id)
+    await product.destroy()
+    res.send(product)
+  } catch (error) {
+    next(error)
+  }
+})
+
 //GET api/products/:size
 //TEST ROUTE: for filtering by size
 router.get('/:size', async (req, res, next) => {

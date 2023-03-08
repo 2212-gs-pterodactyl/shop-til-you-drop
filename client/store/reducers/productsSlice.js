@@ -63,10 +63,6 @@ export const deleteProductAsync = createAsyncThunk(
 export const productsSlice = createSlice({
   name: 'products',
   initialState: [],
-  //   initialState: {
-  //     products: [],
-  //     singleProduct: {},
-  //   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchAllProducts.fulfilled, (state, { payload }) => {
@@ -75,12 +71,11 @@ export const productsSlice = createSlice({
     builder.addCase(fetchSingleProduct.fulfilled, (state, { payload }) => {
       state.singleProduct = payload
     })
-
     builder.addCase(addProductAsync.fulfilled, (state, { payload }) => {
       state.push(payload)
     })
     builder.addCase(editProductAsync.fulfilled, (state, { payload }) => {
-      return state
+      return payload
     })
     builder.addCase(deleteProductAsync.fulfilled, (state, { payload }) => {
       return state
@@ -88,5 +83,5 @@ export const productsSlice = createSlice({
   },
 })
 export const selectProducts = (state) => state.products
-export const selectSingleProduct = (state) => state.singleProduct
+
 export default productsSlice.reducer
