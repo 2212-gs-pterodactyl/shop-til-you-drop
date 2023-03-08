@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { selectCart, fetchCartAsync } from '../store/reducers/cartSlice'
+import { selectCart, fetchCartAsync, deleteItemAsync } from '../store/reducers/cartSlice'
 
 const CartItems = () => {
   const dispatch = useDispatch()
@@ -10,7 +10,6 @@ const CartItems = () => {
   const { cartItems } = cart
   const id = useSelector((state) => state.auth.id)
 
-  console.log(cart)
   const getCartTotal = (cartItems) => {
     let sum = 0
     cartItems.map((elem) => {
@@ -20,13 +19,13 @@ const CartItems = () => {
     return sum
   }
 
+
   useEffect(() => {
     dispatch(fetchCartAsync(id))
   }, [dispatch])
 
   return (
     <div>
-      {console.log('inside return', cart)}
       <h2>Shopping Cart</h2>
       <ul>
         {cart.map((item) => {
@@ -36,11 +35,13 @@ const CartItems = () => {
                 <h3>Name:{item.product.name}</h3>
                 <p>Price: ${item.price}</p>
                 <p>Qty: {item.qty}</p>
+                <button onClick={()=> 
+                  dispatch(deleteItemAsync({id:item.id}))}>X</button>
               </div>
             </li>
           )
         })}
-        {/* <h3>Total: ${getCartTotal(cart)}</h3> */}
+        <h3>Total: ${getCartTotal(cart)}</h3>
       </ul>
     </div>
   )

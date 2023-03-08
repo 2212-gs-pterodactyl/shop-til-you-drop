@@ -83,6 +83,18 @@ router.post('/cart/:id', async (req, res, next) => {
     next(error)
   }
 })
+//DELETE api/orders/cart/:id
+router.delete("/cart/:id", async (req, res, next) => {
+	try {
+		const id = req.params.id
+    console.log(id)
+		const orderToRemove = await OrderProduct.findByPk(id);
+		await orderToRemove.destroy();
+		res.send(orderToRemove);
+	} catch (error) {
+		next(error);
+	}
+});
 
 //GET api/orders/completed/:id
 router.get('/completed/:id', async (req, res, next) => {
