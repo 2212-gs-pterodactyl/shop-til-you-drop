@@ -2,6 +2,18 @@
 import axios from 'axios'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 /* These thunks will make ASYNC calls to our server to fetch our data.*/
+export const fetchAllUsersAsync = createAsyncThunk(
+  'users/fetchAll',
+  async () => {
+    try {
+      const { data } = await axios.get(`/api/users/`)
+      return data
+    } catch (e) {
+      console.log(e)
+    }
+  }
+)
+
 export const fetchOneUserAsync = createAsyncThunk(
   'users/fetchOne',
   async (id) => {
@@ -15,7 +27,7 @@ export const fetchOneUserAsync = createAsyncThunk(
 )
 
 export const editUserAsync = createAsyncThunk(
-  "users/editOne",
+  'users/editOne',
   async ({ firstName, lastName, email, password, address, id }) => {
     const { data } = await axios.put(`/api/users/${id}`, {
       firstName,
@@ -24,10 +36,10 @@ export const editUserAsync = createAsyncThunk(
       password,
       address,
       id,
-    });
-    return data;
+    })
+    return data
   }
-);
+)
 
 const userSlice = createSlice({
   name: 'user',
@@ -35,12 +47,14 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchOneUserAsync.fulfilled, (state, action) => {
-
-      return action.payload;
-    });
+      return action.payload
+    })
     builder.addCase(editUserAsync.fulfilled, (state, action) => {
-      return action.payload;
-    });
+      return action.payload
+    })
+    builder.addCase(fetchAllUsersAsync.fulfilled, (state, { payload }) => {
+      return payload
+    })
   },
 })
 
