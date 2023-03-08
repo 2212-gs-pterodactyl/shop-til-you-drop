@@ -127,7 +127,7 @@ const SingleProduct = () => {
                       addToCartAsync({
                         productId: product.id,
                         price: product.price,
-                        qty: 1,
+                        qty: count,
                         id: UserId,
                       })
                     )
