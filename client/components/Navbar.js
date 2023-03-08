@@ -36,7 +36,7 @@ const NavBar = () => {
               Log Out
             </Button>
             <div className="mr-auto">
-              <NavCart style="float:right" />
+              <NavCart />
             </div>
           </Nav>
         </Container>
