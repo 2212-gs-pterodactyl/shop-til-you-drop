@@ -103,20 +103,20 @@ const SingleProduct = () => {
                     className="m-1"
                     variant="outline-dark"
                     size="sm"
-                    onClick={increment}
+                    onClick={decrement}
                   >
                     {' '}
-                    +{' '}
+                    -{' '}
                   </Button>
                   Quantity: {count}
                   <Button
                     className="m-1"
                     variant="outline-dark"
                     size="sm"
-                    onClick={decrement}
+                    onClick={increment}
                   >
                     {' '}
-                    -
+                    +
                   </Button>
                 </a>
 
