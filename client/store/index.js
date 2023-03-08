@@ -17,7 +17,11 @@ const store = configureStore({
     singleProduct: singleProductsSlice,
     orderSummary: orderSummarySlice,
     counter: counterSlice,
+<<<<<<< HEAD
     order: orderSlice,
+=======
+    orders: orderSlice
+>>>>>>> main
   },
 });
 
