@@ -35,10 +35,8 @@ const NavBar = () => {
             <Button href="#" onClick={() => dispatch(logout())}>
               Log Out
             </Button>
-            <div className="mr-auto">
-              <NavCart />
-            </div>
           </Nav>
+          <NavCart />
         </Container>
       ) : (
         <Container>
