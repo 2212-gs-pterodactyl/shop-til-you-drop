@@ -1,30 +1,53 @@
-import React, { useState, useEffect } from 'react'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
-import ListGroup from 'react-bootstrap/ListGroup'
-import { useSelector } from 'react-redux'
-import Badge from 'react-bootstrap/Badge'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import { useSelector, useDispatch } from "react-redux";
+import Badge from "react-bootstrap/Badge";
+import { Link } from "react-router-dom";
 
 const Checkout = () => {
-  const [total, setTotal] = useState(0)
-  const cart = useSelector((state) => state.cart)
-  console.log('THIS IS CART ITEMS', cart)
+  const dispatch = useDispatch();
+  const [total, setTotal] = useState(0);
+  const cart = useSelector((state) => state.cart);
+  console.log("THIS IS CART ITEMS", cart);
+  const id = useSelector((state) => state.auth.id);
 
-  let newTotal = 0
+  const [address, setAddress] = useState("");
+  const [country, setCountry] = useState("");
+  const [zip, setZip] = useState("");
+  const [state, setState] = useState("");
+  const [orderState, setOrderState] = useState("cart");
+
+  let newTotal = 0;
 
   const updateTotal = (price, qty) => {
-    let product = price * qty
-    newTotal += product
-  }
+    let product = price * qty;
+    newTotal += product;
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    setOrderState("completed");
+    let shippingArray = [];
+    shippingArray.push(address, country, zip, state);
+    let shippingInfo = shippingArray.join(", ");
+
+    dispatch(createCampusAsync({ orderState, shippingInfo, total, id }));
+    setZip("");
+    setAddress("");
+    setState("");
+    setCountry("");
+  };
 
   useEffect(() => {
-    setTotal(newTotal)
-  }, [])
+    setTotal(newTotal);
+  }, []);
 
   return (
     <div>
@@ -35,24 +58,40 @@ const Checkout = () => {
             <Form>
               <Form.Group
                 className="mb-3"
-                controlId="shippingInfo"
-                style={{ width: '90%' }}
+                controlId="shipInfo"
+                style={{ width: "90%" }}
               >
-                <Form.Label>First Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter First Name" />
-                <Form.Label>Last Name </Form.Label>
-                <Form.Control type="text" placeholder="Enter Last Name" />
                 <Form.Label>Address</Form.Label>
-                <Form.Control type="text" placeholder="Enter Address" />
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Address"
+                  value={address}
+                  onChange={(evt) => setAddress(evt.target.value)}
+                />
                 <Form.Label>Country</Form.Label>
-                <Form.Control type="text" placeholder="Enter Country" />
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Country"
+                  value={country}
+                  onChange={(evt) => setCountry(evt.target.value)}
+                />
                 <Form.Label>State</Form.Label>
-                <Form.Control type="text" placeholder="Enter State" />
+                <Form.Control
+                  type="text"
+                  placeholder="Enter State"
+                  value={state}
+                  onChange={(evt) => setState(evt.target.value)}
+                />
                 <Form.Label>Zip Code</Form.Label>
-                <Form.Control type="text" placeholder="Enter Zip Code" />
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Zip Code"
+                  value={zip}
+                  onChange={(evt) => setZip(evt.target.value)}
+                />
               </Form.Group>
               <Link to="/ordersummary">
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" onClick={handleSubmit}>
                   Checkout
                 </Button>
               </Link>
@@ -81,7 +120,7 @@ const Checkout = () => {
         </Row>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Checkout
+export default Checkout;
