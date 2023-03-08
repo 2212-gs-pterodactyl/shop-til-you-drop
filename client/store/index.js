@@ -6,6 +6,7 @@ import singleProductsSlice from "./reducers/singleProductSlice";
 import auth from "./auth";
 import orderSummarySlice from "./reducers/orderSummarySlice";
 import counterSlice from "./reducers/counterSlice";
+import orderSlice from "./reducers/orderSlice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     singleProduct: singleProductsSlice,
     orderSummary: orderSummarySlice,
     counter: counterSlice,
+    order: orderSlice,
   },
 });
 

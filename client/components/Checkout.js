@@ -9,10 +9,12 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { useSelector, useDispatch } from "react-redux";
 import Badge from "react-bootstrap/Badge";
 import { Link } from "react-router-dom";
+import { editOrderAsync, addOrderAsync } from "../store/reducers/orderSlice";
+import { selectCart, resetCart } from "../store/reducers/cartSlice";
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const [total, setTotal] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
   const cart = useSelector((state) => state.cart);
   console.log("THIS IS CART ITEMS", cart);
   const id = useSelector((state) => state.auth.id);
@@ -21,10 +23,9 @@ const Checkout = () => {
   const [country, setCountry] = useState("");
   const [zip, setZip] = useState("");
   const [state, setState] = useState("");
-  const [orderState, setOrderState] = useState("cart");
+  const navcart = useSelector(selectCart);
 
   let newTotal = 0;
-
   const updateTotal = (price, qty) => {
     let product = price * qty;
     newTotal += product;
@@ -32,13 +33,17 @@ const Checkout = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-
-    setOrderState("completed");
     let shippingArray = [];
     shippingArray.push(address, country, zip, state);
     let shippingInfo = shippingArray.join(", ");
 
-    dispatch(createCampusAsync({ orderState, shippingInfo, total, id }));
+    dispatch(
+      addOrderAsync({
+        shippingInfo: shippingInfo,
+        totalPrice: totalPrice,
+        paymentInfo: paymentInfo,
+      })
+    );
     setZip("");
     setAddress("");
     setState("");
@@ -46,7 +51,7 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    setTotal(newTotal);
+    setTotalPrice(newTotal);
   }, []);
 
   return (
@@ -91,7 +96,11 @@ const Checkout = () => {
                 />
               </Form.Group>
               <Link to="/ordersummary">
-                <Button variant="primary" type="submit" onClick={handleSubmit}>
+                <Button
+                  variant="primary"
+                  type="submit"
+                  onClick={() => dispatch(resetCart([]))}
+                >
                   Checkout
                 </Button>
               </Link>
@@ -101,19 +110,21 @@ const Checkout = () => {
             <Card>
               <Card.Header>Your Cart </Card.Header>
               <ListGroup className="list-group-flush">
-                {cart.map((product) => (
-                  <ListGroup.Item key={product.id}>
-                    <div className="d-flex mb-2 justify-content-between">
-                      {product.name}
-                      <Badge pill className="mb-1" bg="warning">
-                        <div>Price: ${product.price}</div>
-                      </Badge>
-                    </div>
-                    <div>Quantity: {product.qty}</div>
-                    {updateTotal(product.price, product.qty)}
-                  </ListGroup.Item>
-                ))}
-                <ListGroup.Item>Total: ${total}</ListGroup.Item>
+                {cart.map((product) => {
+                  return (
+                    <ListGroup.Item key={product.id}>
+                      <div className="d-flex mb-2 justify-content-between">
+                        {product.name}
+                        <Badge pill className="mb-1" bg="warning">
+                          <div>Price: ${product.price}</div>
+                        </Badge>
+                      </div>
+                      <div>Quantity: {product.qty}</div>
+                      {updateTotal(product.price, product.qty)}
+                    </ListGroup.Item>
+                  );
+                })}
+                <ListGroup.Item>Total: ${totalPrice}</ListGroup.Item>
               </ListGroup>
             </Card>
           </Col>
