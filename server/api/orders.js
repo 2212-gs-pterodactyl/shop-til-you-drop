@@ -4,10 +4,43 @@ const { Order, OrderProduct, User, Product } = require('../db')
 //GET api/orders/
 router.get('/', async (req, res, next) => {
   try {
-    const orders = await Order.findAll({ include: User })
+    const orders = await Order.findAll({
+      where: {
+        state: 'completed',
+      },
+      include: [User],
+    })
     res.json(orders)
   } catch (err) {
     next(err)
+  }
+})
+
+//POST api/orders/
+router.post('/', async (req, res, next) => {
+  try {
+    const { shippingInfo, paymentInfo, totalPrice } = req.body
+    const order = await Order.create({
+      shippingInfo,
+      paymentInfo,
+      totalPrice,
+      state: 'completed',
+    })
+    res.json(order)
+  } catch (error) {
+    next(error)
+  }
+})
+
+//PUT api/orders/:id
+router.put('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const { shippingInfo, paymentInfo, totalPrice } = req.body
+    const order = await Order.findByPk(id)
+    res.send(await order.update({ shippingInfo, paymentInfo, totalPrice }))
+  } catch (error) {
+    next(error)
   }
 })
 
@@ -84,17 +117,17 @@ router.post('/cart/:id', async (req, res, next) => {
   }
 })
 //DELETE api/orders/cart/:id
-router.delete("/cart/:id", async (req, res, next) => {
-	try {
-		const id = req.params.id
+router.delete('/cart/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id
     console.log(id)
-		const orderToRemove = await OrderProduct.findByPk(id);
-		await orderToRemove.destroy();
-		res.send(orderToRemove);
-	} catch (error) {
-		next(error);
-	}
-});
+    const orderToRemove = await OrderProduct.findByPk(id)
+    await orderToRemove.destroy()
+    res.send(orderToRemove)
+  } catch (error) {
+    next(error)
+  }
+})
 
 //GET api/orders/completed/:id
 router.get('/completed/:id', async (req, res, next) => {
