@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Cart, CartProduct, User } = require('../db')
+const { Cart, CartProduct, User, Product } = require('../db')
 
 // GET api/carts/:id
 router.get('/:id', async (req, res, next) => {
@@ -8,7 +8,21 @@ router.get('/:id', async (req, res, next) => {
       where: { id: req.params.id },
       include: [CartProduct],
     })
-    res.json(cart)
+    let cartProducts = [];
+    cart.cartItems.map( async (item)=> {
+      let product = await Product.findByPk(item.productId);
+      let cartItem = {
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        size: product.size,
+        img_URL: product.img_URL,
+        type: product.type
+      };
+      cartProducts.push(cartItem);
+    })
+    res.json(cartProducts);
   } catch (error) {
     next(error)
   }
