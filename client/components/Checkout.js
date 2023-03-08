@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
-import { useSelector } from "react-redux";
-import Badge from "react-bootstrap/Badge";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
+import ListGroup from 'react-bootstrap/ListGroup'
+import { useSelector } from 'react-redux'
+import Badge from 'react-bootstrap/Badge'
+import { Link } from 'react-router-dom'
 
 const Checkout = () => {
-  const [total, setTotal] = useState(0);
-  const cart = useSelector((state) => state.cart.cartItems);
-  console.log("THIS IS CART ITEMS", cart);
+  const [total, setTotal] = useState(0)
+  const cart = useSelector((state) => state.cart)
+  console.log('THIS IS CART ITEMS', cart)
 
-  let newTotal = 0;
+  let newTotal = 0
 
   const updateTotal = (price, qty) => {
-    let product = price * qty;
-    newTotal += product;
-  };
+    let product = price * qty
+    newTotal += product
+  }
 
   useEffect(() => {
-    setTotal(newTotal);
-  }, []);
+    setTotal(newTotal)
+  }, [])
 
   return (
     <div>
@@ -36,7 +36,7 @@ const Checkout = () => {
               <Form.Group
                 className="mb-3"
                 controlId="shippingInfo"
-                style={{ width: "90%" }}
+                style={{ width: '90%' }}
               >
                 <Form.Label>First Name</Form.Label>
                 <Form.Control type="text" placeholder="Enter First Name" />
@@ -81,7 +81,7 @@ const Checkout = () => {
         </Row>
       </Container>
     </div>
-  );
-};
+  )
+}
 
-export default Checkout;
+export default Checkout
