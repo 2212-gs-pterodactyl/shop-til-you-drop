@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { fetchAllOrders, selectOrders } from '../store/reducers/orderSlice'
 import { fetchAllUsersAsync, selectUser } from '../store/reducers/userSlice'
-import { fetchAllProducts, selectProducts} from '../store/reducers/productsSlice'
+import { deleteProductAsync, fetchAllProducts, selectProducts} from '../store/reducers/productsSlice'
 
 
 
@@ -46,6 +46,7 @@ function AdminProfile() {
           <td>{user.email}</td>
           <td>{user.address}</td>
         </tr>
+      
         </>
         )
       })}
@@ -71,9 +72,12 @@ function AdminProfile() {
           <td>{product.img_URL}</td>
           <td>{product.type}</td>
         </tr>
+        <button onClick={()=> 
+          dispatch(deleteProductAsync({id:product.id}))}>DELETE</button>
         </>
         )
       })}
+      
       </table>
       <h2>ORDERS</h2>
       <table>
